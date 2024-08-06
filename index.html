@@ -218,6 +218,17 @@
             border-image-source: linear-gradient(45deg, red, yellow, green, blue, purple, red);
             animation: border-glow 1.5s infinite;
         }
+        .popup-image p {
+            margin: 10px 0;
+            font-size: 18px;
+            color: black;
+            font-family: 'Tangerine', cursive;
+        }
+        .popup-image .sign-off {
+            font-size: 24px;
+            color: black;
+            font-family: 'Tangerine', cursive;
+        }
     </style>
 </head>
 <body>
@@ -231,7 +242,7 @@
     <div class="envelope-wrapper" id="envelopeWrapper">
         <div class="envelope">
             <div class="letter glow-border">
-                <p>Happy Birthday</p>
+                <p>Happy Birthday!</p>
             </div>
         </div>
         <div class="heart"></div>
@@ -239,7 +250,8 @@
     <div class="hearts" id="hearts"></div>
     <div class="popup-image" id="popupImage">
         <img src="frnd.jpg" alt="Surprise Image">
-        <p>I deeply regret my past actions and sincerely apologize. Nonetheless, I want to wish you a very Happy Birthday</p>
+        <p>I deeply regret my past actions and sincerely apologize. Nonetheless, I want to wish you a very Happy Birthday❤️</p>
+        <p class="sign-off">With Love, Gopika</p>
     </div>
     <script>
         const giftbox = document.getElementById('giftbox');
