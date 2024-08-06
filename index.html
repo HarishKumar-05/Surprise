@@ -4,19 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interactive Gift Box with Envelope</title>
-    <link href="https://fonts.googleapis.com/css2?family=Tangerine:wght@700&family=Roboto:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tangerine:wght@700&display=swap" rel="stylesheet">
     <style>
         body {
-            background: linear-gradient(to bottom, black, red);
-            background-image: url('https://www.transparenttextures.com/patterns/glitter.png');
-            background-blend-mode: overlay;
+            background: linear-gradient(to bottom, red, black);
             margin: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             overflow: hidden;
-            font-family: 'Tangerine', cursive;
         }
         .giftbox {
             position: relative;
@@ -107,7 +104,7 @@
         }
         .letter {
             position: absolute;
-            right: 23%;
+            right: 20%;
             bottom: 0;
             width: 54%;
             height: 80%;
@@ -116,6 +113,7 @@
             transition: all 1s ease-in-out;
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
             padding: 20px 10px;
+            font-family: 'Tangerine', cursive;
             font-size: 24px;
             color: black;
         }
@@ -145,7 +143,58 @@
         .heart::after {
             right: 15px;
         }
-        .popup {
+        .flap .envelope::before {
+            transform: rotateX(180deg);
+            z-index: 0;
+        }
+        .flap .letter {
+            bottom: 100px;
+            transform: scale(1.5);
+            transition-delay: 1s;
+        }
+        .flap .heart {
+            transform: rotate(90deg);
+            transition-delay: 0.4s;
+        }
+        .hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        .heart-shape {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: red;
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            animation: float 4s infinite;
+        }
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-1000px);
+                opacity: 0;
+            }
+        }
+        .glow-border {
+            border: 5px solid;
+            border-image-slice: 1;
+            border-image-source: linear-gradient(45deg, red, yellow, green, blue, purple, red);
+            animation: border-glow 1.5s infinite;
+        }
+        @keyframes border-glow {
+            0% {
+                border-image-source: linear-gradient(45deg, red, yellow, green, blue, purple, red);
+            }
+            100% {
+                border-image-source: linear-gradient(45deg, purple, red, yellow, green, blue, purple);
+            }
+        }
+        .popup-image {
             display: none;
             position: fixed;
             top: 50%;
@@ -160,7 +209,7 @@
             width: 80%;
             max-width: 400px;
         }
-        .popup img {
+        .popup-image img {
             width: 100%;
             height: auto;
             border-radius: 10px;
@@ -168,101 +217,6 @@
             border-image-slice: 1;
             border-image-source: linear-gradient(45deg, red, yellow, green, blue, purple, red);
             animation: border-glow 1.5s infinite;
-        }
-        .popup p {
-            font-size: 18px;
-            font-weight: bold;
-            font-style: italic;
-            color: black;
-            margin-top: 10px;
-            font-family: 'Roboto', sans-serif;
-        }
-        @keyframes border-glow {
-            0% {
-                border-image-source: linear-gradient(45deg, red, yellow, green, blue, purple, red);
-            }
-            100% {
-                border-image-source: linear-gradient(45deg, purple, red, yellow, green, blue, purple);
-            }
-        }
-        .flap .envelope::before {
-            transform: rotateX(180deg);
-            z-index: 0;
-        }
-        .flap .letter {
-            bottom: 200px;
-            transform: scale(1.5);
-            transition-delay: 1s;
-        }
-        .flap .heart {
-            transform: rotate(90deg);
-            transition-delay: 0.4s;
-        }
-        .hearts {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 6;
-        }
-        .heart-shape {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background: red;
-            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-            animation: float 4s infinite;
-        }
-        .heart-shape::before {
-            content: "";
-            position: absolute;
-            top: -5px;
-            left: -5px;
-            width: 30px;
-            height: 30px;
-            background: radial-gradient(circle, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 60%);
-            border-radius: 50%;
-            pointer-events: none;
-        }
-        @keyframes float {
-            0% {
-                transform: translateY(0);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-1000px);
-                opacity: 0;
-            }
-        }
-        @media screen and (max-width: 768px) {
-            .envelope {
-                width: 80%;
-                height: auto;
-            }
-            .letter {
-                width: 80%;
-                height: auto;
-                font-size: 20px;
-            }
-            .popup p {
-                font-size: 16px;
-            }
-            .heart {
-                top: 45%;
-                left: 50%;
-                width: 25px;
-                height: 25px;
-            }
-            .heart::before, .heart::after {
-                width: 25px;
-                height: 25px;
-            }
-            .heart::before {
-                top: -12px;
-            }
-            .heart::after {
-                right: 12px;
-            }
         }
     </style>
 </head>
@@ -277,23 +231,24 @@
     <div class="envelope-wrapper" id="envelopeWrapper">
         <div class="envelope">
             <div class="letter glow-border">
-                <img src="path/to/your/image.jpg" alt="Surprise Image">
+                <p>Happy Birthday</p>
             </div>
         </div>
         <div class="heart"></div>
     </div>
     <div class="hearts" id="hearts"></div>
-    <div class="popup" id="popup">
-        <p>Happy Birthday<br>I deeply regret my past actions and sincerely apologize. Nonetheless, I want to wish you a very Happy Birthday</p>
+    <div class="popup-image" id="popupImage">
+        <img src="frnd.jpg" alt="Surprise Image">
+        <p>I deeply regret my past actions and sincerely apologize. Nonetheless, I want to wish you a very Happy Birthday</p>
     </div>
     <script>
         const giftbox = document.getElementById('giftbox');
         const message = document.getElementById('message');
         const wishButton = document.getElementById('wishButton');
         const envelopeWrapper = document.getElementById('envelopeWrapper');
-        const heart = document.querySelector('.heart');
-        const popup = document.getElementById('popup');
         const hearts = document.getElementById('hearts');
+        const heart = document.querySelector('.heart');
+        const popupImage = document.getElementById('popupImage');
 
         giftbox.addEventListener('click', () => {
             giftbox.style.display = 'none';
@@ -306,23 +261,21 @@
         });
 
         heart.addEventListener('click', () => {
-            envelopeWrapper.classList.add('flap');
+            envelopeWrapper.classList.toggle('flap');
             setTimeout(() => {
-                createHearts();
-                popup.style.display = 'block';
+                popupImage.style.display = 'block';
+                showHearts();
             }, 1500);
         });
 
-        function createHearts() {
-            for (let i = 0; i < 50; i++) {
+        function showHearts() {
+            for (let i = 0; i < 100; i++) {
                 const heart = document.createElement('div');
-                heart.className = 'heart-shape';
+                heart.classList.add('heart-shape');
                 heart.style.left = `${Math.random() * 100}%`;
-                heart.style.animationDuration = `${2 + Math.random() * 3}s`;
+                heart.style.animationDuration = `${Math.random() * 2 + 3}s`;
                 hearts.appendChild(heart);
-                setTimeout(() => {
-                    heart.remove();
-                }, 4000);
+                setTimeout(() => heart.remove(), 4000);
             }
         }
     </script>
