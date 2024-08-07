@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Gift Box with Envelope</title>
+    <title>Surprise</title>
     <link href="https://fonts.googleapis.com/css2?family=Tangerine:wght@700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -46,6 +46,16 @@
             width: 20px;
             left: 50%;
             transform: translateX(-50%);
+        }
+        .bow {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 40px;
+            background: red;
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
         }
         .message {
             display: none;
@@ -223,16 +233,61 @@
             font-size: 18px;
             color: black;
             font-family: 'Tangerine', cursive;
+            font-weight: bold;
         }
         .popup-image .sign-off {
             font-size: 24px;
             color: black;
             font-family: 'Tangerine', cursive;
+            font-weight: bold;
+        }
+        @media only screen and (max-width: 600px) {
+            .giftbox {
+                width: 120px;
+                height: 120px;
+            }
+            .giftbox::before {
+                height: 16px;
+            }
+            .giftbox::after {
+                width: 16px;
+            }
+            .bow {
+                width: 30px;
+                height: 30px;
+                top: -15px;
+            }
+            .envelope {
+                width: 250px;
+                height: 190px;
+            }
+            .envelope::before {
+                border-top: 100px solid #ecdeb8;
+                border-right: 125px solid transparent;
+                border-left: 125px solid transparent;
+            }
+            .envelope::after {
+                border-top: 100px solid transparent;
+                border-right: 125px solid #e6cfa7;
+                border-bottom: 80px solid #e6cfa7;
+                border-left: 125px solid #e6cfa7;
+            }
+            .letter {
+                right: 15%;
+                width: 70%;
+                height: 60%;
+                padding: 15px 5px;
+            }
+            .popup-image {
+                width: 90%;
+                max-width: 350px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="giftbox" id="giftbox">
+        <div class="bow"></div>
         <p class="giftbox-text">Click Me!</p>
     </div>
     <div class="message" id="message">
@@ -251,7 +306,7 @@
     <div class="popup-image" id="popupImage">
         <img src="frnd.jpg" alt="Surprise Image">
         <p class="apology-text"><strong>I deeply regret my past actions and sincerely apologize. Nonetheless, I want to wish you a very Happy Birthday❤️</strong></p>
-        <p class="sign-off"><strong></strong>With Love, Gopika</strong></p>
+        <p class="sign-off"><strong>With Love, Gopika</strong></p>
     </div>
     <script>
         const giftbox = document.getElementById('giftbox');
